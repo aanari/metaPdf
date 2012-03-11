@@ -1,16 +1,11 @@
 #!/usr/bin/env python
 from distutils.core import setup
-import os
-
-here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README')).read()
 
 setup(name= 'metaPdf',
       version='0.1',
       description='A lightweight PDF library optimized for metadata extraction and insertion',
       author='Ali Anari',
       author_email='ali@alianari.com',
-      long_description=README,
       license='BSD',
       classifiers=[
         'Intended Audience :: Developers',
