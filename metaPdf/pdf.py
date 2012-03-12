@@ -21,7 +21,7 @@ def read_metadata(file_name):
     """
 
     properties = {}
-    with open(str(file), 'rb') as f:
+    with open(str(file_name), 'rb') as f:
         f.seek(-4096, os.SEEK_END)
         end_block = f.read()
         for p in re.finditer('(?:\/(\w+)\s?\(([^\n\r]*)\)\n?\r?)', end_block, re.S):

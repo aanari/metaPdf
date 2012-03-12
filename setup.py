@@ -19,7 +19,7 @@ setup(name= 'metaPdf',
         'License :: OSI Approved :: BSD License',
         'Topic :: Software Development :: Libraries :: Python Modules',
       ],
-      url='http://github.com/aanari/metaPdf',
+      url='https://github.com/aanari/metaPdf',
       keywords='python pdf metadata extraction insertion',
       packages=find_packages()
     )
