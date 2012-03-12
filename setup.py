@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name= 'metaPdf',
       version='0.1',
@@ -21,5 +21,5 @@ setup(name= 'metaPdf',
       ],
       url='http://github.com/aanari/metaPdf',
       keywords='python pdf metadata extraction insertion',
-      packages=['metaPdf']
+      packages=find_packages()
     )
