@@ -1,9 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os, glob, re
+"""
+.. module:: pdf
+   :platform: Unix, Windows
+   :synopsis: The metaPdf implementation.
 
-def read(file):
+.. moduleauthor:: Ali Anari <ali@alianari.com>
+
+"""
+
+import os, re
+
+def read_metadata(file_name):
+    """This function reads a PDF file and returns its metadata.
+    :param file_name: The PDF file name to read.
+    :type file_name: str
+    :returns: dict -- The returned metadata as a dictionary of properties.
+
+    """
+
     properties = {}
     with open(str(file), 'rb') as f:
         f.seek(-4096, os.SEEK_END)

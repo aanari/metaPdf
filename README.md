@@ -10,4 +10,4 @@ Usage
 -----
 
     from metaPdf import pdf
-    pdf.read('book.pdf')
+    pdf.readMetadata('book.pdf')
