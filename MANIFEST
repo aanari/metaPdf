@@ -1,2 +1,3 @@
-README
 setup.py
+metaPdf/__init__.py
+metaPdf/pdf.py
