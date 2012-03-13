@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-setup(name= 'metaPdf',
-      version='0.2.3',
+setup(name= 'metapdf',
+      version='0.2.4',
       description='A lightweight PDF library optimized for metadata extraction and insertion',
       long_description='',
       author='Ali Anari',

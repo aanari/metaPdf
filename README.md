@@ -1,13 +1,13 @@
-metaPdf
+metapdf
 =======
 
 Installation
 ------------
 
-    easy_install metaPdf
+    easy_install metapdf
 
 Usage
 -----
 
-    from metaPdf import metaPdfReader
-    metaPdfReader().read_metadata('1984.pdf')
+    from metapdf import MetaPdfReader
+    MetaPdfReader().read_metadata('1984.pdf')
