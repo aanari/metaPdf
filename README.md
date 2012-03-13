@@ -9,5 +9,5 @@ Installation
 Usage
 -----
 
-    from metaPdf import pdf
-    pdf.read_metadata('book.pdf')
+    from metaPdf import metaPdfReader
+    metaPdfReader().read_metadata('1984.pdf')
