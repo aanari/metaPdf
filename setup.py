@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(name= 'metapdf',
-      version='0.2.4',
+      version='0.2.5',
       description='A lightweight PDF library optimized for metadata extraction and insertion',
       long_description='',
       author='Ali Anari',
@@ -19,7 +19,7 @@ setup(name= 'metapdf',
         'License :: OSI Approved :: BSD License',
         'Topic :: Software Development :: Libraries :: Python Modules',
       ],
-      url='https://github.com/aanari/metaPdf',
+      url='https://github.com/aanari/metapdf',
       keywords='python pdf metadata extraction insertion',
       packages=find_packages()
     )
