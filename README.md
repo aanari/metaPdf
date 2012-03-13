@@ -9,5 +9,12 @@ Installation
 Usage
 -----
 
-    from metapdf.metapdf import MetaPdfReader
-    MetaPdfReader().read_metadata('1984.pdf')
+```python
+from metapdf.metapdf import MetaPdfReader
+MetaPdfReader().read_metadata('1984.pdf')
+```
+
+    {
+        Author: 'George Orwell',
+        Title: '1984'
+    }
