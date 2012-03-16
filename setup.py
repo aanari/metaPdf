@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 requires = ['pyPdf']
 
 setup(name= 'metapdf',
-      version='0.3.1',
+      version='0.3.2',
       description='A lightweight PDF library optimized for metadata extraction and insertion',
       long_description='',
       author='Ali Anari',
