@@ -1,7 +1,7 @@
 metapdf
 =======
 
-The metapdf library is a lightweight Python library optimized for metadata extraction and insertion.
+The metapdf library is a lightweight Python library optimized for metadata extraction and insertion, and it is a fast wrapper over the excellent [pyPdf](https://github.com/mfenniak/pyPdf) library.  It works by quickly searching the last 2048 bytes of the PDF before parsing the xref table, offering a 50-60% performance increase over directly parsing the table line by line.
 
 
 Installation
@@ -14,8 +14,9 @@ Usage
 -----
 
 ```python
->>> from metapdf.metapdf import MetaPdfReader
->>> MetaPdfReader().read_metadata('1984.pdf')
+>>> import os
+>>> from metapdf import MetaPdfReader
+>>> MetaPdfReader().read_metadata(read('1984.pdf', 'rb'))
 {
     Author: 'George Orwell',
     Title: '1984'

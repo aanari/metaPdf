@@ -1,5 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Copyright (c) 2012 Ali Anari
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 
 """
 .. module:: metapdf
@@ -10,8 +31,12 @@
 
 """
 
+__author__ = "Ali Anari"
+__author_email__ = "ali@alianari.com"
+
 
 import os, re
+from pyPdf import PdfFileReader
 
 
 class _meta_pdf_reader(object):
@@ -20,62 +45,31 @@ class _meta_pdf_reader(object):
         self.instance = self.__hash__()
         self.metadata_regex = re.compile('(?:\/(\w+)\s?\(([^\n\r]*)\)\n?\r?)', re.S)
         self.metadata_offset = 2048
-        self.start_header = 10240 / self.metadata_offset
 
-    def _metadata(self, f, depth, multiplier):
+    def read_metadata(self, stream):
 
-        """This is a helper method called by read_metadata.
-
-        """
-
-        lastindex = depth/multiplier
-        f.seek((depth * -self.metadata_offset), os.SEEK_END)
-        for i in range(1, lastindex):
-            properties = dict((p.group(1), p.group(2)) for p in self.metadata_regex.finditer(f.read(multiplier * self.metadata_offset)))
-            if properties: break
-        return properties
-
-    def read_metadata(self, file_name):
-
-        """This function reads a PDF file and returns its metadata.
-        :param file_name: The PDF file name to read.
+        """This function reads a PDF file stream and returns its metadata.
+        :param file_name: The PDF file stream to read.
         :type file_name: str
         :returns: dict -- The returned metadata as a dictionary of properties.
 
         """
 
-        with open(str(file_name), 'rb') as f:
-
-            # Scan the last 2048 bytes, the most
-            # frequent metadata density block
-            f.seek(-self.metadata_offset, os.SEEK_END)
-            properties = dict((p.group(1), p.group(2)) for p in self.metadata_regex.finditer(f.read(self.metadata_offset)))
-            if properties:
+        # Scan the last 2048 bytes, the most
+        # frequent metadata density block
+        stream.seek(-self.metadata_offset, os.SEEK_END)
+        try:
+            properties = dict(('/' + p.group(1), p.group(2).decode('utf-8')) \
+                for p in self.metadata_regex.finditer(stream.read(self.metadata_offset)))
+            if '/Author' in properties:
                 return properties
+        except UnicodeDecodeError:
+            properties.clear()
 
-            # Scan forward from the last 200 * 2048
-            # bytes, the next high density region
-            properties = self._metadata(f, 200, 10)
-            if properties:
-                return properties
-
-            # Investigate the header at 5 * 2048
-            f.seek(0)
-            properties = dict((p.group(1), p.group(2)) for p in self.metadata_regex.finditer(f.read(self.start_header * self.metadata_offset)))
-            if properties:
-                return properties
-
-            # Do a fast scan through the last 1000 * 2048
-            properties = self._metadata(f, 800, 50)
-            if properties:
-                return properties
-
-            # Last ditch attempt, scan entire file
-            f.seek(start_header)
-            while True:
-                properties = dict((p.group(1), p.group(2)) for p in self.metadata_regex.finditer(f.read(self.metadata_offset*4)))
-                if properties:
-                    return properties
+        # Parse the xref table using pyPdf
+        properties = PdfFileReader(stream).documentInfo
+        if properties:
+            return properties
 
         return {}
 

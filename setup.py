@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(name= 'metapdf',
-      version='0.2.5',
+      version='0.3.0',
       description='A lightweight PDF library optimized for metadata extraction and insertion',
       long_description='',
       author='Ali Anari',
