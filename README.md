@@ -18,9 +18,12 @@ Usage
 >>> from metapdf import MetaPdfReader
 >>> MetaPdfReader().read_metadata(read('1984.pdf', 'rb'))
 {
-    Author: 'George Orwell',
-    Title: '1984'
-}
+    '/Author': 'George Orwell',
+    '/Title': '1984',
+    '/ModDate': u"D:20041013081643-04'00'",
+    '/CreationDate': u'D:20001221232522Z',
+    '/Producer': u'Acrobat PDFWriter 4.0 for Windows',
+    '/Creator': u'George Orwell - 1984.doc - Microsoft Word'
 ```
 
 
