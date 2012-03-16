@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
+requires = ['pyPdf']
+
 setup(name= 'metapdf',
-      version='0.3.0',
+      version='0.3.1',
       description='A lightweight PDF library optimized for metadata extraction and insertion',
       long_description='',
       author='Ali Anari',
@@ -21,5 +23,7 @@ setup(name= 'metapdf',
       ],
       url='https://github.com/aanari/metapdf',
       keywords='python pdf metadata extraction insertion',
-      packages=find_packages()
+      packages=find_packages(),
+      install_requires=requires,
+      tests_requires=requires
     )
